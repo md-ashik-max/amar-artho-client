@@ -59,9 +59,6 @@ const Navbar = () => {
 
                 </div>
                 <Link to="/"><img src="https://i.ibb.co/QfpSRGd/icons8-taka-64.png" alt="" /></Link>
-                <div>
-                    <Link to="/register"><button>Register</button></Link>
-                </div>
             </div>
         </div>
     );
