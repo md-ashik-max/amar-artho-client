@@ -9,7 +9,6 @@ const Login = () => {
         emailOrMobile: '',
         pin: '',
     });
-    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -44,7 +43,6 @@ const Login = () => {
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-400 to-blue-500">
             <div className="p-6 max-w-md w-full bg-white rounded-lg shadow-xl">
                 <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Login</h2>
-                {errorMessage && <p className="text-red-500 text-center mb-4">{errorMessage}</p>}
                 <form onSubmit={handleSubmit}>
                     <div className="form-control mb-4 relative">
                         <FaEnvelope className="absolute left-3 top-3 text-gray-400" />
