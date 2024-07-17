@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUser, FaLock, FaPhone, FaEnvelope } from 'react-icons/fa';
+import Swal from 'sweetalert2'; // Import SweetAlert
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -19,17 +20,24 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
         try {
-            const res = await axios.post('/api/users/register', formData);
+            const res = await axios.post('http://localhost:5000/users/register', formData);
             if (res.data) {
-                navigate('/login');
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Registration successful! Please login.',
+                    icon: 'success',
+                });
+                navigate('/'); // Redirect to login page
             }
         } catch (err) {
-            console.error(err);
+            Swal.fire({
+                title: 'Error!',
+                text: err.response?.data?.error || 'Registration failed. Please try again.',
+                icon: 'error',
+            });
         }
     };
-
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-indigo-600">
             <div className="p-6 max-w-md w-full bg-white rounded-lg shadow-xl">
@@ -103,7 +111,7 @@ const Register = () => {
                     </button>
                 </form>
                 <div className='text-center my-6'>
-                    <p>Already have an account? Please <span className='text-blue-600 font-black border-b-2'><Link to="/login">Login</Link></span></p>
+                    <p>Already have an account? Please <span className='text-blue-600 font-black border-b-2'><Link to="/">Login</Link></span></p>
                 </div>
             </div>
         </div>

@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { FaLock, FaPhone } from 'react-icons/fa';
+import { FaLock, FaEnvelope } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const [formData, setFormData] = useState({
-        mobile: '',
+        emailOrMobile: '',
         pin: '',
     });
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -16,15 +18,25 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
         try {
-            const res = await axios.post('/api/users/login', formData);
+            const res = await axios.post('http://localhost:5000/users/login', formData);
             if (res.data) {
-                // Save the token to local storage or context state
-                navigate('/');
+                localStorage.setItem('token', res.data.token);
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Login successful!',
+                    icon: 'success',
+                }).then(() => {
+                    navigate('/dashboard/home'); // Redirect to home page
+                });
             }
         } catch (err) {
-            console.error(err);
+            const message = err.response?.data?.error || 'Login failed. Please try again.';
+            Swal.fire({
+                title: 'Error!',
+                text: message,
+                icon: 'error',
+            });
         }
     };
 
@@ -32,16 +44,17 @@ const Login = () => {
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-400 to-blue-500">
             <div className="p-6 max-w-md w-full bg-white rounded-lg shadow-xl">
                 <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Login</h2>
+                {errorMessage && <p className="text-red-500 text-center mb-4">{errorMessage}</p>}
                 <form onSubmit={handleSubmit}>
-                <div className="mb-4 relative">
-                        <FaPhone className="absolute left-3 top-3 text-gray-400" />
+                    <div className="form-control mb-4 relative">
+                        <FaEnvelope className="absolute left-3 top-3 text-gray-400" />
                         <input
                             type="text"
-                            name="mobile"
-                            value={formData.mobile}
+                            name="emailOrMobile"
+                            value={formData.emailOrMobile}
                             onChange={handleChange}
-                            className="w-full p-2 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                            placeholder="Mobile"
+                            className="input input-bordered w-full pl-10"
+                            placeholder="Email or Mobile"
                             required
                         />
                     </div>
