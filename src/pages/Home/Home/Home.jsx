@@ -1,24 +1,33 @@
+import { Link } from "react-router-dom";
 import useAdmin from "../../../hooks/useAdmin";
-import useAllUser from "../../../hooks/useAllUser";
 
 
 
 const Home = () => {
     const [isAdmin] = useAdmin();
-    const [allUser,isLoading,error] = useAllUser();
-    // console.log(allUser)
     return (
         <div className="min-h-screen flex justify-center items-center">
-            {isAdmin ? <h1>This is admin home</h1> : <h1>home</h1>}
-            {isLoading ? (
-                <p>Loading users...</p>
-            ) : error ? (
-                <p>Error fetching users: {error.message}</p>
-            ) : (
-                allUser.map((user) => (
-                    <h1 key={user._id}>{user.name}</h1>
-                ))
-            )}
+            {isAdmin ? <h1>This is admin home</h1> :
+                <div className="md:flex gap-8 text-center">
+                    <Link to="/dashboard/cashIn">
+                        <div className="w-52 h-40 border-2 rounded-xl">
+                            <h3>Cash In</h3>
+                        </div>
+                    </Link>
+                    <Link>
+                        <div className="w-52 h-40 border-2 rounded-xl">
+                            <h3>Cash Out</h3>
+                        </div>
+                    </Link>
+                    <Link to="/dashboard/sendMoney">
+                        <div className="w-52 h-40 border-2 rounded-xl">
+                            <h3>Send Money</h3>
+                        </div>
+                    </Link>
+                </div>
+            }
+
+
         </div>
     );
 };
