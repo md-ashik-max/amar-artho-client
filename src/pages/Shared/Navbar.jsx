@@ -37,14 +37,11 @@ const Navbar = () => {
                                 <div className="flex items-center border-2 rounded-3xl p-2 w-44 space-x-2 text-gray-700 cursor-pointer" onClick={toggleBalance}>
                                     {showBalance ? (
                                         <>
-                                            <div className="flex justify-between">
+                                            <div className="flex justify-between w-full">
                                                 <div>
-                                                    <span className="ml-2">{user.balance} Taka</span>
-
-
+                                                   <p className="ml-2">{user.balance} Taka</p>
                                                 </div>
                                                 <div>
-
                                                     <img src="https://i.ibb.co/pzhLQMP/icons8-taka-64-1.png" alt="Taka" className="w-6 h-6 rounded-full" />
                                                 </div>
                                             </div>

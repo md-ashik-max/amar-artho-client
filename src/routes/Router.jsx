@@ -11,6 +11,7 @@ import Route from "../layout/Route";
 import ManageUsers from "../pages/AdminRoute/ManageUsers";
 import CashIn from "../pages/UserRoute/CashIn";
 import SendMoney from "../pages/UserRoute/SendMoney";
+import CashOut from "../pages/UserRoute/CashOut";
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
             {
                 path: 'sendMoney',
                 element:<SendMoney></SendMoney>
+            },
+            {
+                path: 'cashOut',
+                element:<CashOut></CashOut>
             }
 
         ]

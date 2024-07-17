@@ -14,7 +14,7 @@ const Home = () => {
                             <h3>Cash In</h3>
                         </div>
                     </Link>
-                    <Link>
+                    <Link to="/dashboard/cashOut">
                         <div className="w-52 h-40 border-2 rounded-xl">
                             <h3>Cash Out</h3>
                         </div>
