@@ -3,9 +3,10 @@ import Navbar from "../pages/Shared/Navbar";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
+import Footer from "../pages/Shared/Footer";
 
 const Main = () => {
-    const { user, setUser } = useContext(AuthContext);
+    const { setUser } = useContext(AuthContext);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
@@ -41,6 +42,7 @@ const Main = () => {
         <div>
             <Navbar />
             <Outlet />
+            <Footer/>
         </div>
     );
 };
