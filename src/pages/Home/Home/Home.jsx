@@ -6,7 +6,7 @@ import useAllUser from "../../../hooks/useAllUser";
 const Home = () => {
     const [isAdmin] = useAdmin();
     const [allUser,isLoading,error] = useAllUser();
-    console.log(allUser)
+    // console.log(allUser)
     return (
         <div className="min-h-screen flex justify-center items-center">
             {isAdmin ? <h1>This is admin home</h1> : <h1>home</h1>}

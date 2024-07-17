@@ -1,9 +1,13 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import useAdmin from "../../hooks/useAdmin";
+import { CgLogOut } from "react-icons/cg";
+import { FaUser } from "react-icons/fa";
 
 const Navbar = () => {
     const { user, setUser } = useContext(AuthContext);
+    const [isAdmin] = useAdmin();
     const [showBalance, setShowBalance] = useState(false);
     const navigate = useNavigate();
 
@@ -74,15 +78,31 @@ const Navbar = () => {
                         </div>
                         <div className="drawer-side">
                             <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
-                            <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-                                {/* Sidebar content here */}
-                                <li>  {user && (
-                                    <button onClick={handleLogout} className="btn btn-danger">
-                                        Logout
-                                    </button>
-                                )}</li>
-                                <li><a>Sidebar Item 2</a></li>
-                            </ul>
+
+                            {isAdmin ?
+                                <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+                                    {/* Sidebar content here */}
+                                    <div className="flex flex-col justify-center items-center mb-6">
+                                    <img src="https://i.ibb.co/QfpSRGd/icons8-taka-64.png" alt="" />
+                                        <p className="text-xl font-bold">Amar Artho</p>
+                                    </div>
+                                    <li><Link to="/dashboard/manageUsers"><button className="btn flex items-center font-bold bg-transparent hover:text-[#0677A1]"><FaUser/> Manage User</button></Link></li>
+                                    <li>  {user && (
+                                        <li> <button onClick={handleLogout} className="flex items-center text-black font-bold hover:text-red-600">Log Out <CgLogOut className="text-xl font-bold"></CgLogOut></button></li>
+                                    )}</li>
+
+                                </ul>
+                                :
+                                <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+                                    {/* Sidebar content here */}
+                                    <li>  {user && (
+                                        <button onClick={handleLogout} className="btn btn-danger">
+                                            Logout
+                                        </button>
+                                    )}</li>
+                                    <li><a>Sidebar Item 2</a></li>
+                                </ul>
+                            }
                         </div>
                     </div>
                 </div>
