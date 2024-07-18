@@ -12,10 +12,12 @@ const Footer = () => {
                         <span className="text-sm">Home</span>
                     </div>
                 </Link>
-                <div className="footer-item flex items-center mx-6">
-                    <FaEnvelope className="text-xl mr-2" />
-                    <span className="text-sm">Inbox</span>
-                </div>
+                <Link to="/dashboard/inbox">
+                    <div className="footer-item flex items-center mx-6">
+                        <FaEnvelope className="text-xl mr-2" />
+                        <span className="text-sm">Inbox</span>
+                    </div>
+                </Link>
             </div>
         </footer>
     );
