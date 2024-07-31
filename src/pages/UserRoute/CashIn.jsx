@@ -20,7 +20,8 @@ const CashIn = () => {
             userName: user?.name,
             balance: user?.balance,
             date: new Date(),
-            type: "Cash In"
+            type: "Cash In",
+            status:"unaccepted"
         }
 
         try {

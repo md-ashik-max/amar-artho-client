@@ -3,14 +3,20 @@ import { Link } from "react-router-dom";
 import { FaMoneyBillWave, FaMoneyCheckAlt, FaPaperPlane } from "react-icons/fa";
 import useAdmin from "../../../hooks/useAdmin";
 import Banner from "./Banner/Banner";
+import useAgent from "../../../hooks/useAgent";
+import AgentHome from "../../AgentRoute/AgentHome";
 
 const Home = () => {
     const [isAdmin] = useAdmin();
+    const [isAgent] = useAgent();
     return (
         <div className="container mx-auto pt-40">
             {isAdmin ? (
-                <h1 className="text-center text-3xl font-bold">This is admin home</h1>
-            ) : (
+                <div className="text-center h-screen text-3xl font-bold">This is admin home</div>
+            ) :
+            isAgent?(  <AgentHome/>)
+            :
+            (
                 <div className="text-center">
                     <div className="flex flex-col md:flex-row gap-8 justify-center items-center mb-12 shadow-xl rounded-xl pb-12">
                         <Link to="/dashboard/cashIn">
